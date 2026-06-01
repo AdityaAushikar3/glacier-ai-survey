@@ -25,8 +25,8 @@ interface DatabaseSchema {
   sessions: Record<string, RespondentSession>;
 }
 
-// Absolute path to the local db.json file in the workspace
-const DB_FILE_PATH = 'c:\\Users\\Aditya\\Desktop\\Survey\\survey-app\\db.json';
+// Dynamic, cross-platform path to the db.json file in the active workspace
+const DB_FILE_PATH = path.join(process.cwd(), 'db.json');
 
 // Helper to initialize or load the database safely
 function loadDb(): DatabaseSchema {

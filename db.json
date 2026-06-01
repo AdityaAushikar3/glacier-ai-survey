@@ -27,6 +27,34 @@
       ],
       "persona": "Enthusiastic and nostalgic food blogger, eager to uncover the heart and soul behind people's favorite mango preparations.",
       "createdAt": "2026-06-01T11:18:06.734Z"
+    },
+    "1780320207880": {
+      "id": "1780320207880",
+      "title": "Cats & Remote Work: The Purr-fect Balance?",
+      "topic": " Feline-Human Dynamics and Remote Work Productivity",
+      "description": "We want to understand how owning a cat impacts the mental well-being and daily productivity of remote workers. We are looking to capture insights into common distractions (like walking on keyboards), emotional support benefits, and whether cat owners feel their pets reduce or increase work-related stress.",
+      "goals": [
+        "Identify the primary ways cats impact remote workers' mental well-being (both positive and negative).",
+        "Quantify the extent to which cats serve as distractions versus sources of comfort during the workday.",
+        "Understand the correlation between cat ownership and perceived levels of work-related stress among remote employees.",
+        "Gather specific examples and anecdotes of how cats influence remote work routines and productivity."
+      ],
+      "persona": "Empathetic and observant pet lover, with a keen interest in work-life balance. The interviewer should be curious, non-judgmental, and skilled at drawing out personal experiences and feelings.",
+      "createdAt": "2026-06-01T13:23:27.880Z"
+    },
+    "1780320399889": {
+      "id": "1780320399889",
+      "title": "Dog Feeder Feedback",
+      "topic": "dog feader review ",
+      "description": "launched my dog feader program , now i want review",
+      "goals": [
+        "Understand user satisfaction with the new dog feeder program.",
+        "Identify key features users find most valuable.",
+        "Uncover pain points or areas for improvement in the dog feeder program.",
+        "Gather suggestions for future enhancements to the dog feeder program."
+      ],
+      "persona": "Friendly and enthusiastic product tester, eager to hear about new pet products and their experiences.",
+      "createdAt": "2026-06-01T13:26:39.889Z"
     }
   },
   "sessions": {}
