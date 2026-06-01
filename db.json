@@ -55,6 +55,20 @@
       ],
       "persona": "Friendly and enthusiastic product tester, eager to hear about new pet products and their experiences.",
       "createdAt": "2026-06-01T13:26:39.889Z"
+    },
+    "1780320813682": {
+      "id": "1780320813682",
+      "title": "Dog Feeder User Feedback",
+      "topic": "Dog feader response ",
+      "description": "i have Installed the dof feaders in the locality i nedd its response ",
+      "goals": [
+        "Understand user satisfaction with the installed dog feeders.",
+        "Identify common issues or challenges encountered by users.",
+        "Gather suggestions for improving the dog feeder design or functionality.",
+        "Assess the perceived impact of the dog feeders on the local dog population and community."
+      ],
+      "persona": "Friendly and community-oriented local representative",
+      "createdAt": "2026-06-01T13:33:33.682Z"
     }
   },
   "sessions": {}

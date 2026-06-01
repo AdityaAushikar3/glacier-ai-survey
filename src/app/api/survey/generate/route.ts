@@ -9,21 +9,16 @@ let apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GEMINI_API_
 
 if (!apiKey) {
   try {
-    const absolutePath = 'c:\\Users\\Aditya\\Desktop\\Survey\\survey-app\\.env';
-    const envContent = fs.readFileSync(absolutePath, 'utf8');
-    const match = envContent.match(/GOOGLE_GENERATIVE_AI_API_KEY\s*=\s*([^\r\n]+)/);
-    if (match) {
-      apiKey = match[1].trim();
-    }
-  } catch (err) {
-    try {
-      const localPath = path.join(process.cwd(), '.env');
-      const envContent = fs.readFileSync(localPath, 'utf8');
+    const envPath = path.join(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf8');
       const match = envContent.match(/GOOGLE_GENERATIVE_AI_API_KEY\s*=\s*([^\r\n]+)/);
       if (match) {
         apiKey = match[1].trim();
       }
-    } catch (e) {}
+    }
+  } catch (err) {
+    console.error("Local .env read failed:", err);
   }
 }
 

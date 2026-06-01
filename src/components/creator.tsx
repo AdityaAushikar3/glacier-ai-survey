@@ -31,6 +31,7 @@ export default function CreatorDashboard() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedSurvey, setGeneratedSurvey] = useState<Survey | null>(null);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Analytics state
   const [surveys, setSurveys] = useState<Survey[]>([]);
@@ -85,6 +86,7 @@ export default function CreatorDashboard() {
     if (!topic.trim() || !description.trim() || isGenerating) return;
 
     setIsGenerating(true);
+    setError(null);
     try {
       const res = await fetch('/api/survey/generate', {
         method: 'POST',
@@ -92,14 +94,17 @@ export default function CreatorDashboard() {
         body: JSON.stringify({ topic, description }),
       });
       const data = await res.json();
-      if (data.id) {
+      if (res.ok && data.id) {
         setGeneratedSurvey(data);
         setTopic('');
         setDescription('');
         fetchSurveys(); // Refresh list
+      } else {
+        setError(data.error || "Failed to generate survey blueprint.");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Generation failed:", err);
+      setError("Connection failure. Please verify your Vercel deployment logs.");
     } finally {
       setIsGenerating(false);
     }
@@ -201,6 +206,19 @@ export default function CreatorDashboard() {
               </div>
 
               <form onSubmit={handleCreateSurvey} className="flex flex-col gap-4">
+                <AnimatePresence>
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold rounded-xl leading-relaxed"
+                    >
+                      ⚠️ {error}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-medium text-on_surface_variant">Research Topic</label>
                   <input
