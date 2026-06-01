@@ -1,0 +1,33 @@
+{
+  "surveys": {
+    "1780311673062": {
+      "id": "1780311673062",
+      "title": "Feline Feelings: Your Cat's Health Impact",
+      "topic": "How cats affect human health ",
+      "description": "see how humans feel after spending time with cat ",
+      "goals": [
+        "To understand the perceived emotional benefits of interacting with cats (e.g., reduced stress, increased happiness).",
+        "To identify any reported physical health improvements associated with cat ownership or interaction.",
+        "To explore the frequency and duration of interactions that correlate with perceived health benefits.",
+        "To gather anecdotal evidence of how cats influence daily routines and well-being."
+      ],
+      "persona": "A curious and gentle veterinarian's assistant, keen to understand the human-animal bond.",
+      "createdAt": "2026-06-01T11:01:13.062Z"
+    },
+    "1780312686734": {
+      "id": "1780312686734",
+      "title": "Aam Ras Aficionados Survey",
+      "topic": "survey about aam rass",
+      "description": "how people are in love with aam ras and why , whats threre views about it \n",
+      "goals": [
+        "Understand the primary emotional drivers and reasons behind people's love for aam ras.",
+        "Identify the most cherished aspects and sensory experiences associated with consuming aam ras.",
+        "Explore variations in consumption habits and preferences related to aam ras across different demographics.",
+        "Gauge consumer perceptions of quality, authenticity, and potential improvements for aam ras products."
+      ],
+      "persona": "Enthusiastic and nostalgic food blogger, eager to uncover the heart and soul behind people's favorite mango preparations.",
+      "createdAt": "2026-06-01T11:18:06.734Z"
+    }
+  },
+  "sessions": {}
+}
