@@ -180,7 +180,7 @@ export default function App() {
         <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-tertiary flex items-center justify-center font-bold text-white text-sm shadow-[0_0_15px_var(--color-shadow-primary)]">
           G
         </div>
-        <span className="font-display font-bold text-lg tracking-tight bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
+        <span className="font-display font-extrabold text-xl tracking-tight text-on_surface" style={{ color: 'var(--color-on_surface)' }}>
           Glacier
         </span>
       </div>

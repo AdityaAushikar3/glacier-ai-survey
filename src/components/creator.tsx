@@ -138,183 +138,123 @@ export default function CreatorDashboard() {
   const goalStats = getGoalStats();
 
   return (
-    <div className="max-w-6xl mx-auto w-full p-4 md:p-8">
-      {/* Hero Header Section */}
-      {activeTab === 'create' ? (
-        <div className="text-center py-10 md:py-14 max-w-3xl mx-auto px-4 mb-4">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 border border-primary/20 text-primary mb-4"
-          >
-            <Sparkles className="w-3.5 h-3.5 animate-pulse text-tertiary" />
-            <span>Gemini-Powered Research Intelligence</span>
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 font-display bg-gradient-to-r from-primary via-on_surface to-tertiary bg-clip-text text-transparent leading-[1.1]"
-          >
-            Surveys that talk like humans
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="text-sm md:text-base text-on_surface_variant max-w-xl mx-auto leading-relaxed"
-          >
-            Glacier AI designs custom conversational interviewers that adapt to respondents' answers in real-time, extracting high-fidelity insights automatically.
-          </motion.p>
-
-          {/* Tab Selector */}
-          <div className="flex gap-2 p-1.5 glass-panel inline-flex mt-6 shadow-md">
-            <button
-              onClick={() => setActiveTab('create')}
-              className={`px-5 py-2 text-sm rounded-lg font-semibold transition-all flex items-center cursor-pointer ${
-                activeTab === 'create'
-                  ? 'bg-primary/20 text-primary border border-primary/30 shadow-inner'
-                  : 'text-on_surface_variant hover:text-on_surface'
-              }`}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Design Survey
-            </button>
-            <button
-              onClick={() => {
-                setActiveTab('analytics');
-                fetchSurveys();
-              }}
-              className={`px-5 py-2 text-sm rounded-lg font-semibold transition-all flex items-center cursor-pointer ${
-                activeTab === 'analytics'
-                  ? 'bg-primary/20 text-primary border border-primary/30 shadow-inner'
-                  : 'text-on_surface_variant hover:text-on_surface'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Analytics Portal
-            </button>
-          </div>
+    <div className="max-w-5xl mx-auto w-full p-4 md:p-8">
+      {/* Header */}
+      <header className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
+            Creator Studio
+          </h1>
+          <p className="text-sm text-on_surface_variant mt-1">Design intent-aware adaptive surveys & analyze insights</p>
         </div>
-      ) : (
-        /* Analytics Tab Header: Sleek, compact and professional dashboard layout */
-        <header className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border-subtle pb-6 mt-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
-              Analytics Dashboard
-            </h1>
-            <p className="text-sm text-on_surface_variant mt-1">Review qualitative Gemini fact-extractions & graphical coverage rates</p>
-          </div>
 
-          <div className="flex gap-2 p-1.5 glass-panel self-start shadow-md">
-            <button
-              onClick={() => setActiveTab('create')}
-              className={`px-4 py-2 text-sm rounded-lg font-semibold transition-all flex items-center cursor-pointer ${
-                activeTab === 'create'
-                  ? 'bg-primary/20 text-primary border border-primary/30'
-                  : 'text-on_surface_variant hover:text-on_surface'
-              }`}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Design Survey
-            </button>
-            <button
-              onClick={() => {
-                setActiveTab('analytics');
-                fetchSurveys();
-              }}
-              className={`px-4 py-2 text-sm rounded-lg font-semibold transition-all flex items-center cursor-pointer ${
-                activeTab === 'analytics'
-                  ? 'bg-primary/20 text-primary border border-primary/30'
-                  : 'text-on_surface_variant hover:text-on_surface'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Analytics Portal
-            </button>
-          </div>
-        </header>
-      )}
+        {/* Tab Buttons */}
+        <div className="flex gap-2 p-1 glass-panel self-start">
+          <button
+            onClick={() => setActiveTab('create')}
+            className={`px-4 py-2 text-sm rounded-lg font-medium transition-all ${
+              activeTab === 'create'
+                ? 'bg-primary/20 text-primary border border-primary/30'
+                : 'text-on_surface_variant hover:text-on_surface'
+            }`}
+          >
+            <Plus className="w-4 h-4 inline-block mr-2" />
+            Design Survey
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('analytics');
+              fetchSurveys();
+            }}
+            className={`px-4 py-2 text-sm rounded-lg font-medium transition-all ${
+              activeTab === 'analytics'
+                ? 'bg-primary/20 text-primary border border-primary/30'
+                : 'text-on_surface_variant hover:text-on_surface'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4 inline-block mr-2" />
+            Analytics Portal
+          </button>
+        </div>
+      </header>
 
       {/* Main Content Area */}
       <AnimatePresence mode="wait">
         {activeTab === 'create' ? (
           <motion.div
             key="create-tab"
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="grid lg:grid-cols-5 gap-8 items-start"
+            exit={{ opacity: 0, y: -15 }}
+            className="grid md:grid-cols-2 gap-8"
           >
-            {/* Design Form & Blueprint Workspace (Left Side) */}
-            <div className="lg:col-span-3 flex flex-col gap-8">
-              {/* Design Form */}
-              <div className="glass-panel p-6 flex flex-col gap-6">
-                <div>
-                  <h2 className="text-xl font-semibold text-primary flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-tertiary" />
-                    Define Research Goal
-                  </h2>
-                  <p className="text-sm text-on_surface_variant mt-1">
-                    Describe what you want to learn. Gemini will design custom information goals and an interviewer persona.
-                  </p>
-                </div>
-
-                <form onSubmit={handleCreateSurvey} className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-on_surface_variant">Research Topic</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Taste Satisfaction of Pizza Delivery App"
-                      value={topic}
-                      onChange={(e) => setTopic(e.target.value)}
-                      disabled={isGenerating}
-                      className="glass-input p-3 text-on_surface placeholder:text-on_surface_variant/40"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-on_surface_variant">Description & Background</label>
-                    <textarea
-                      required
-                      rows={4}
-                      placeholder="e.g. We launched a pizza delivery app last month. We want to interview users who ordered thin crust to know if they liked the crunchiness, what they felt about delivery speed, and app ease of use."
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      disabled={isGenerating}
-                      className="glass-input p-3 text-on_surface placeholder:text-on_surface_variant/40 resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isGenerating || !topic.trim() || !description.trim()}
-                    className="mt-2 w-full py-4 bg-primary/20 text-primary border border-primary/30 rounded-xl hover:bg-primary/30 transition-all font-semibold flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <RefreshCw className="w-5 h-5 animate-spin" />
-                        Designing Survey...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-5 h-5" />
-                        Generate Survey Blueprint
-                      </>
-                    )}
-                  </button>
-                </form>
+            {/* Design Form */}
+            <div className="glass-panel p-6 flex flex-col gap-6">
+              <div>
+                <h2 className="text-xl font-semibold text-primary flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-tertiary" />
+                  Define Research Goal
+                </h2>
+                <p className="text-sm text-on_surface_variant mt-1">
+                  Describe what you want to learn. Gemini will design custom information goals and an interviewer persona.
+                </p>
               </div>
 
-              {/* Generated Blueprint Result (stacked below form when active) */}
-              <AnimatePresence>
-                {generatedSurvey && (
+              <form onSubmit={handleCreateSurvey} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-on_surface_variant">Research Topic</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Taste Satisfaction of Pizza Delivery App"
+                    value={topic}
+                    onChange={(e) => setTopic(e.target.value)}
+                    disabled={isGenerating}
+                    className="glass-input p-3 text-on_surface placeholder:text-on_surface_variant/40"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-on_surface_variant">Description & Background</label>
+                  <textarea
+                    required
+                    rows={4}
+                    placeholder="e.g. We launched a pizza delivery app last month. We want to interview users who ordered thin crust to know if they liked the crunchiness, what they felt about delivery speed, and app ease of use."
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    disabled={isGenerating}
+                    className="glass-input p-3 text-on_surface placeholder:text-on_surface_variant/40 resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isGenerating || !topic.trim() || !description.trim()}
+                  className="mt-2 w-full py-4 bg-primary/20 text-primary border border-primary/30 rounded-xl hover:bg-primary/30 transition-all font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  {isGenerating ? (
+                    <>
+                      <RefreshCw className="w-5 h-5 animate-spin" />
+                      Designing Survey...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5" />
+                      Generate Survey Blueprint
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Generated Blueprint / Instructions */}
+            <div className="flex flex-col justify-between gap-6">
+              <AnimatePresence mode="wait">
+                {generatedSurvey ? (
                   <motion.div
                     key="blueprint-result"
-                    initial={{ opacity: 0, scale: 0.98 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
                     className="glass-panel-elevated p-6 border-primary/30 bg-primary/5 flex flex-col gap-6 scanning-card relative overflow-hidden"
                   >
                     <div>
@@ -350,7 +290,7 @@ export default function CreatorDashboard() {
                         </span>
                         <button
                           onClick={() => copyToClipboard(generatedSurvey.id)}
-                          className="p-2 rounded hover:bg-surface-bright text-on_surface_variant hover:text-primary transition-all shrink-0 cursor-pointer"
+                          className="p-2 rounded hover:bg-surface-bright text-on_surface_variant hover:text-primary transition-all shrink-0"
                           title="Copy sharing link"
                         >
                           {copied ? <span className="text-xs text-primary font-bold">Copied!</span> : <Copy className="w-4 h-4" />}
@@ -366,92 +306,31 @@ export default function CreatorDashboard() {
                       </a>
                     </div>
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="blueprint-placeholder"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="glass-panel p-6 flex flex-col items-center justify-center text-center h-full min-h-[300px] text-on_surface_variant gap-4 group"
+                  >
+                    <Mascot />
+                    <div>
+                      <h3 className="text-lg font-bold text-on_surface font-display">Hello! I am GlaBot, your AI Assistant</h3>
+                      <p className="text-sm mt-1 max-w-[320px] mx-auto leading-relaxed">
+                        Input your research topic and description on the left. I will automatically design custom information goals and launch our adaptive conversational interviewer!
+                      </p>
+                    </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-
-            {/* Utility Sidebar Panel (Right Side) */}
-            <div className="lg:col-span-2 flex flex-col gap-8">
-              {/* Welcoming Mascot Widget */}
-              <div className="glass-panel p-6 flex flex-col items-center justify-center text-center text-on_surface_variant gap-4 group">
-                <Mascot />
-                <div>
-                  <h3 className="text-lg font-bold text-on_surface font-display">Meet GlaBot, your AI Assistant</h3>
-                  <p className="text-sm mt-1 max-w-[320px] mx-auto leading-relaxed">
-                    Input your research topic and description on the left. I will automatically design custom information goals and launch our adaptive conversational interviewer!
-                  </p>
-                </div>
-              </div>
-
-              {/* Active Research Portals (Live Surveys sidebar card) */}
-              <div className="glass-panel p-6 flex flex-col gap-4">
-                <div>
-                  <h3 className="text-lg font-bold text-primary flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-tertiary" />
-                    Active Research Portals
-                  </h3>
-                  <p className="text-xs text-on_surface_variant mt-0.5">
-                    Live links currently accepting respondent feedback.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1 scrollbar-hide">
-                  {surveys.length === 0 ? (
-                    <div className="text-center py-8 text-xs text-on_surface_variant border border-dashed border-border-subtle rounded-xl">
-                      No active portals yet. Generate a survey blueprint to create one!
-                    </div>
-                  ) : (
-                    surveys.map((s) => (
-                      <div 
-                        key={s.id}
-                        className="p-3 bg-background border border-border-subtle hover:border-primary/30 rounded-xl transition-all flex flex-col gap-2 relative group/item"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="font-semibold text-sm text-on_surface truncate max-w-[70%]" title={s.title}>
-                            {s.title}
-                          </div>
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 shrink-0">
-                            {s.responseCount} {s.responseCount === 1 ? 'response' : 'responses'}
-                          </span>
-                        </div>
-                        
-                        <p className="text-xs text-on_surface_variant line-clamp-1 italic">
-                          "{s.topic}"
-                        </p>
-
-                        <div className="flex gap-2 mt-1">
-                          <button
-                            onClick={() => copyToClipboard(s.id)}
-                            className="flex-1 py-1.5 px-2 bg-surface-bright border border-border-subtle hover:border-primary/30 rounded-lg text-xs font-semibold text-on_surface_variant hover:text-primary transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                          >
-                            <Copy className="w-3 h-3" />
-                            {copied ? "Copied!" : "Copy Link"}
-                          </button>
-                          <button
-                            onClick={() => {
-                              setSelectedSurveyId(s.id);
-                              setActiveTab('analytics');
-                            }}
-                            className="py-1.5 px-3 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer"
-                          >
-                            Analytics
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
             </div>
           </motion.div>
         ) : (
           <motion.div
             key="analytics-tab"
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, y: -15 }}
             className="flex flex-col gap-8"
           >
             {/* Survey Selector */}

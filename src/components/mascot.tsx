@@ -3,41 +3,12 @@ import { motion } from 'framer-motion';
 export default function Mascot() {
   return (
     <div className="flex flex-col items-center justify-center p-2 relative h-48 w-48 mx-auto">
-      {/* Floating Mascot Head and Body using premium Framer Motion loops */}
-      <motion.div 
-        className="relative z-10 w-full h-full flex items-center justify-center cursor-pointer"
-        animate={{
-          y: [-5, 5, -5]
-        }}
-        transition={{
-          y: {
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }
-        }}
-        whileHover={{
-          scale: 1.04,
-          rotate: -1.5,
-          transition: {
-            type: "spring",
-            stiffness: 90,
-            damping: 14
-          }
-        }}
-        whileTap={{
-          scale: 0.97,
-          transition: {
-            type: "spring",
-            stiffness: 150,
-            damping: 10
-          }
-        }}
-      >
+      {/* Floating Mascot Head and Body */}
+      <div className="animate-mascot-float relative z-10 w-full h-full flex items-center justify-center">
         <svg 
           viewBox="0 0 120 120" 
           fill="none" 
-          className="w-36 h-36 filter drop-shadow-[0_4px_10px_rgba(125,211,252,0.15)]"
+          className="w-36 h-36 filter drop-shadow-[0_4px_10px_rgba(125,211,252,0.15)] group-hover:scale-105 transition-transform duration-300"
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Antennas */}
@@ -74,25 +45,14 @@ export default function Mascot() {
             strokeWidth="1.5"
           />
 
-          {/* Blinking Circular Eyes - Occasional Blinking loop using Framer Motion */}
-          <motion.g 
-            animate={{
-              scaleY: [1, 1, 1, 0.1, 1, 1, 1]
-            }}
-            transition={{
-              duration: 4.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              times: [0, 0.45, 0.47, 0.49, 0.51, 0.55, 1]
-            }}
-            style={{ originX: "60px", originY: "47px" }}
-          >
+          {/* Blinking Circular Eyes */}
+          <g className="animate-mascot-blink">
             <circle cx="48" cy="47" r="5" fill="var(--color-primary)" />
             <circle cx="72" cy="47" r="5" fill="var(--color-primary)" />
             {/* Eye Pupil Sparkles */}
             <circle cx="49.5" cy="45.5" r="1.5" fill="#ffffff" />
             <circle cx="73.5" cy="45.5" r="1.5" fill="#ffffff" />
-          </motion.g>
+          </g>
 
           {/* Mouth/LED Indicator */}
           <line x1="52" y1="55" x2="68" y2="55" stroke="var(--color-tertiary)" strokeWidth="2.5" strokeLinecap="round" className="opacity-80" />
@@ -109,22 +69,13 @@ export default function Mascot() {
             strokeLinejoin="round" 
           />
 
-          {/* Glowing Center Power Core LED - gentle breathing glow */}
-          <motion.circle 
+          {/* Glowing Center Power Core LED */}
+          <circle 
             cx="60" 
             cy="87" 
             r="6" 
             fill="var(--color-primary)" 
-            animate={{
-              opacity: [0.7, 1, 0.7],
-              scale: [0.95, 1.05, 0.95]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{ originX: "60px", originY: "87px" }}
+            className="animate-mascot-led"
           />
           {/* Core Sparkle */}
           <circle cx="60" cy="87" r="2" fill="#ffffff" opacity="0.9" />
@@ -135,22 +86,15 @@ export default function Mascot() {
           <circle cx="26" cy="90" r="3.5" fill="var(--color-tertiary)" />
           <circle cx="94" cy="90" r="3.5" fill="var(--color-tertiary)" />
         </svg>
-      </motion.div>
+      </div>
 
       {/* Ground Inverse Shadow - shrinks/grows with robot floating height */}
-      <motion.div 
-        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-on_surface/5 dark:bg-primary/10 rounded-full blur-[2px]"
+      <div 
+        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-on_surface/5 dark:bg-primary/10 rounded-full blur-[2px] transition-all duration-[3000ms] animate-pulse"
         style={{
           boxShadow: '0 0 8px var(--color-shadow-primary)',
-        }}
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.3, 0.6, 0.3]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
+          opacity: 0.5,
+          scale: '1.1'
         }}
       />
     </div>

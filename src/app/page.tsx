@@ -180,7 +180,7 @@ export default function App() {
         <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-tertiary flex items-center justify-center font-bold text-white text-sm shadow-[0_0_15px_var(--color-shadow-primary)]">
           G
         </div>
-        <span className="font-display font-extrabold text-xl tracking-tight text-on_surface">
+        <span className="font-display font-extrabold text-xl tracking-tight text-on_surface" style={{ color: 'var(--color-on_surface)' }}>
           Glacier
         </span>
       </div>
@@ -269,20 +269,14 @@ export default function App() {
           {isSubmitted ? (
             <motion.div
               key="success-screen"
-              initial={{ opacity: 0, scale: 0.98, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               className="flex-1 flex flex-col items-center justify-center text-center gap-6 relative"
             >
               <ConfettiBlast />
-              <motion.div 
-                initial={{ scale: 0.82, rotate: -6 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.15 }}
-                className="p-5 rounded-full bg-primary/10 text-primary border-3 border-primary/20 drop-shadow-[0_0_20px_var(--color-shadow-primary)]"
-              >
-                <CheckCircle2 className="w-16 h-16 text-primary" />
-              </motion.div>
+              <div className="p-5 rounded-full bg-primary/10 text-primary border-3 border-primary/20 drop-shadow-[0_0_20px_var(--color-shadow-primary)]">
+                <CheckCircle2 className="w-16 h-16 animate-bounce text-primary" />
+              </div>
               <div>
                 <h2 className="text-2xl font-bold text-on_surface font-display">Survey Completed Successfully!</h2>
                 <p className="text-sm text-on_surface_variant mt-2 max-w-[340px] leading-relaxed">
@@ -291,7 +285,7 @@ export default function App() {
               </div>
               <button
                 onClick={exitSurvey}
-                className="mt-4 px-6 py-3 border border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl text-sm font-semibold transition-all cursor-pointer"
+                className="mt-4 px-6 py-3 border border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl text-sm font-semibold transition-all"
               >
                 Return to Creator Studio
               </button>
@@ -309,9 +303,8 @@ export default function App() {
                 {messages.map((m) => (
                   <motion.div
                     key={m.id}
-                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div

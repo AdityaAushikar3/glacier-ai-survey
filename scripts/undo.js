@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BACKUP_DIR = path.join(__dirname, '..', '.antigravity_backup');
+const BACKUP_DIR = path.join(__dirname, '..', 'backup_');
 const SRC_DIR = path.join(__dirname, '..', 'src');
 
 const mappings = [
