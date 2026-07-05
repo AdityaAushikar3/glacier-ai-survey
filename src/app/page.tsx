@@ -83,6 +83,7 @@ export default function App() {
     const currentMessages = [...messages, userMessage];
     setMessages(currentMessages);
 
+    let assistantMessageId: string | null = null;
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -91,7 +92,14 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to send message: ${response.statusText}`);
+        let errorMsg = `Failed to send message: ${response.statusText}`;
+        try {
+          const errJSON = await response.json();
+          if (errJSON && errJSON.error) {
+            errorMsg = errJSON.error;
+          }
+        } catch (_) {}
+        throw new Error(errorMsg);
       }
 
       const body = response.body;
@@ -102,9 +110,9 @@ export default function App() {
       let done = false;
       let assistantMessageContent = '';
       
-      const assistantMessageId = (Date.now() + 1).toString();
+      assistantMessageId = (Date.now() + 1).toString();
       
-      setMessages((prev) => [...prev, { id: assistantMessageId, role: 'assistant', content: '' }]);
+      setMessages((prev) => [...prev, { id: assistantMessageId!, role: 'assistant', content: '' }]);
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
@@ -141,8 +149,27 @@ export default function App() {
           )
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Streaming error:', error);
+      const errMessage = error.message || 'Something went wrong.';
+      setMessages((prev) => {
+        if (assistantMessageId) {
+          return prev.map((msg) =>
+            msg.id === assistantMessageId
+              ? { ...msg, content: msg.content ? `${msg.content}\n\n⚠️ Error: ${errMessage}` : `⚠️ Error: ${errMessage}` }
+              : msg
+          );
+        } else {
+          return [
+            ...prev,
+            {
+              id: (Date.now() + 1).toString(),
+              role: 'assistant',
+              content: `⚠️ Error: ${errMessage}`,
+            },
+          ];
+        }
+      });
     } finally {
       setIsLoading(false);
     }

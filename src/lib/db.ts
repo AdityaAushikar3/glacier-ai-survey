@@ -25,17 +25,37 @@ interface DatabaseSchema {
   sessions: Record<string, RespondentSession>;
 }
 
-// Dynamic, cross-platform path to the db.json file in the active workspace
-const DB_FILE_PATH = path.join(process.cwd(), 'db.json');
+// Check if running on Vercel
+const IS_VERCEL = !!process.env.VERCEL;
+
+// Resolve the read-only and writeable paths
+const READONLY_DB_PATH = path.join(process.cwd(), 'db.json');
+const WRITEABLE_DB_PATH = path.join('/tmp', 'db.json');
+
+const DB_FILE_PATH = IS_VERCEL ? WRITEABLE_DB_PATH : READONLY_DB_PATH;
 
 // Helper to initialize or load the database safely
 function loadDb(): DatabaseSchema {
   try {
-    if (!fs.existsSync(DB_FILE_PATH)) {
-      const initialDb: DatabaseSchema = { surveys: {}, sessions: {} };
-      fs.writeFileSync(DB_FILE_PATH, JSON.stringify(initialDb, null, 2), 'utf8');
-      return initialDb;
+    if (IS_VERCEL) {
+      // If the writeable db.json doesn't exist in /tmp, copy it from the bundle (if exists) or create a new one
+      if (!fs.existsSync(WRITEABLE_DB_PATH)) {
+        if (fs.existsSync(READONLY_DB_PATH)) {
+          const seedData = fs.readFileSync(READONLY_DB_PATH, 'utf8');
+          fs.writeFileSync(WRITEABLE_DB_PATH, seedData, 'utf8');
+        } else {
+          const initialDb: DatabaseSchema = { surveys: {}, sessions: {} };
+          fs.writeFileSync(WRITEABLE_DB_PATH, JSON.stringify(initialDb, null, 2), 'utf8');
+        }
+      }
+    } else {
+      // Local development flow
+      if (!fs.existsSync(READONLY_DB_PATH)) {
+        const initialDb: DatabaseSchema = { surveys: {}, sessions: {} };
+        fs.writeFileSync(READONLY_DB_PATH, JSON.stringify(initialDb, null, 2), 'utf8');
+      }
     }
+
     const data = fs.readFileSync(DB_FILE_PATH, 'utf8');
     return JSON.parse(data);
   } catch (error) {

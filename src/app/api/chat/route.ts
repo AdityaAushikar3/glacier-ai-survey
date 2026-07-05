@@ -31,6 +31,15 @@ const google = createGoogleGenerativeAI({
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
+  if (!apiKey) {
+    return new Response(
+      JSON.stringify({
+        error: "Missing Google Gemini API key. Please add GOOGLE_GENERATIVE_AI_API_KEY or GEMINI_API_KEY to your Vercel Project Environment Variables.",
+      }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   const { messages, surveyId } = await req.json();
 
   let systemPrompt = `You are an AI Interviewer conducting a user feedback survey.
