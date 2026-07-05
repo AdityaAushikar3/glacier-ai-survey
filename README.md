@@ -1,37 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Glacier
 
-## Getting Started
+**Adaptive Conversational Survey AI**
 
-First, run the development server:
+Glacier is an AI-powered conversational survey platform that replaces traditional static web forms with adaptive AI interviews. Instead of asking every respondent the same fixed questions, Glacier conducts dynamic conversations, adapts follow-up questions based on responses, supports natural language (including Hinglish), and automatically transforms conversations into actionable insights through visual analytics.
+
+---
+
+## Why I Built It
+
+While validating a startup idea, I realized that traditional survey tools like Google Forms collect answers but rarely capture conversations. Static questionnaires often miss context, cannot adapt to a respondent's answers, and require hours of manual qualitative analysis.
+
+Glacier was built to make surveys feel like natural interviews while automatically extracting meaningful insights from every conversation.
+
+---
+
+## Demo
+
+🎥 ![Demo](demo/GlacierDemo.mp4)
+
+---
+
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### AI Conversation
+
+![AI Chat](screenshots/chat.png)
+
+### Analytics Dashboard
+
+![Analytics](screenshots/analytics.png)
+
+---
+
+## Features
+
+- 🤖 AI-powered conversational surveys
+- 💬 Adaptive follow-up questioning
+- 🎭 Persona-based AI interviewers
+- 🌐 Hinglish and natural language support
+- 📊 Automated qualitative insight extraction
+- 📈 Visual dashboard and analytics
+- 📋 Coverage charts based on research goals
+- 📝 Survey creation interface
+- ⚡ Streaming AI conversations
+
+---
+
+## Tech Stack
+
+### Frontend
+- Next.js 15
+- React
+- Tailwind CSS
+- Framer Motion
+
+### AI
+- Gemini 2.5 Flash Lite
+- Vercel AI SDK
+
+### Backend
+- Next.js API Routes
+
+### Database
+- Local JSON-based mock database (`db.json`)
+
+### UI
+- Lucide React Icons
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/glacier.git
+```
+
+Navigate to the project:
+
+```bash
+cd glacier
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **http://localhost:3000** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Future Improvements
 
-## Learn More
+- 🔐 User authentication
+- ☁️ Cloud database integration
+- 🌍 Multi-language support
+- 🎙️ Voice-based AI interviews
+- 👥 Team collaboration
+- 📄 Exportable reports (PDF/CSV)
+- 📱 Mobile-responsive enhancements
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## About
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# glacier-ai-survey" 
+Glacier was built as part of validating a startup idea in the arts ecosystem. The goal was to rethink how qualitative surveys are conducted by replacing static forms with intelligent AI-driven conversations that generate richer insights with significantly less manual effort.
