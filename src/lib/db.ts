@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import defaultDb from '../../db.json';
 
 export interface SurveyBlueprint {
   id: string;
@@ -38,21 +39,14 @@ const DB_FILE_PATH = IS_VERCEL ? WRITEABLE_DB_PATH : READONLY_DB_PATH;
 function loadDb(): DatabaseSchema {
   try {
     if (IS_VERCEL) {
-      // If the writeable db.json doesn't exist in /tmp, copy it from the bundle (if exists) or create a new one
+      // If the writeable db.json doesn't exist in /tmp, copy it from defaultDb
       if (!fs.existsSync(WRITEABLE_DB_PATH)) {
-        if (fs.existsSync(READONLY_DB_PATH)) {
-          const seedData = fs.readFileSync(READONLY_DB_PATH, 'utf8');
-          fs.writeFileSync(WRITEABLE_DB_PATH, seedData, 'utf8');
-        } else {
-          const initialDb: DatabaseSchema = { surveys: {}, sessions: {} };
-          fs.writeFileSync(WRITEABLE_DB_PATH, JSON.stringify(initialDb, null, 2), 'utf8');
-        }
+        fs.writeFileSync(WRITEABLE_DB_PATH, JSON.stringify(defaultDb, null, 2), 'utf8');
       }
     } else {
       // Local development flow
       if (!fs.existsSync(READONLY_DB_PATH)) {
-        const initialDb: DatabaseSchema = { surveys: {}, sessions: {} };
-        fs.writeFileSync(READONLY_DB_PATH, JSON.stringify(initialDb, null, 2), 'utf8');
+        fs.writeFileSync(READONLY_DB_PATH, JSON.stringify(defaultDb, null, 2), 'utf8');
       }
     }
 
@@ -60,7 +54,7 @@ function loadDb(): DatabaseSchema {
     return JSON.parse(data);
   } catch (error) {
     console.error("Error loading JSON database:", error);
-    return { surveys: {}, sessions: {} };
+    return defaultDb as DatabaseSchema;
   }
 }
 

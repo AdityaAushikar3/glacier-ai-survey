@@ -85,13 +85,21 @@ Rules:
     }
   }
 
-  const result = await streamText({
-    model: google('gemini-2.5-flash-lite'),
-    system: systemPrompt,
-    messages,
-  });
+  try {
+    const result = await streamText({
+      model: google('gemini-2.5-flash-lite'),
+      system: systemPrompt,
+      messages,
+    });
 
-  return result.toTextStreamResponse();
+    return result.toTextStreamResponse();
+  } catch (error: any) {
+    console.error("Chat API error:", error);
+    return new Response(
+      JSON.stringify({ error: error.message || String(error) }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 }
 
 
